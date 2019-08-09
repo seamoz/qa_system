@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/qa-parent/qa-parent.iml" filepath="$PROJECT_DIR$/qa-parent/qa-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qa-parent/qa_h5_api/qa_h5_api.iml" filepath="$PROJECT_DIR$/qa-parent/qa_h5_api/qa_h5_api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qa-parent/marketing/qa_marketing.iml" filepath="$PROJECT_DIR$/qa-parent/marketing/qa_marketing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qa-parent/member/qa_member.iml" filepath="$PROJECT_DIR$/qa-parent/member/qa_member.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qa-parent/questions/qa_questions.iml" filepath="$PROJECT_DIR$/qa-parent/questions/qa_questions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qa-parent/sdk/qa_sdk.iml" filepath="$PROJECT_DIR$/qa-parent/sdk/qa_sdk.iml" />
+    </modules>
+  </component>
+</project>

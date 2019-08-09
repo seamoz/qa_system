@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="qa_marketing" />
+        <module name="qa_questions" />
+        <module name="qa_member" />
+        <module name="qa_h5_api" />
+        <module name="qa_sdk" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="qa-parent" target="1.8" />
+      <module name="qa_h5_api" target="1.8" />
+      <module name="qa_marketing" target="1.8" />
+      <module name="qa_member" target="1.8" />
+      <module name="qa_questions" target="1.8" />
+      <module name="qa_sdk" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="qa-parent" options="-parameters" />
+      <module name="qa_h5_api" options="-parameters" />
+      <module name="qa_marketing" options="-parameters" />
+      <module name="qa_member" options="-parameters" />
+      <module name="qa_questions" options="-parameters" />
+      <module name="qa_sdk" options="-parameters" />
+    </option>
+  </component>
+</project>

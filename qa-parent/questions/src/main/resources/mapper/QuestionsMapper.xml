@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--命名空间-->
+<mapper namespace="com.ps.mapper.QuestionsMapper">
+
+
+    <resultMap type="com.ps.domain.Questions" id="queryAnswerResultMap">
+
+        <id property="issue_id" column="issue_id"></id>
+        <result property="memberId" column="memberId"></result>
+        <result property="issueContent" column="issueContent"></result>
+        <result property="integral" column="integral"></result>
+        <result property="accept_id" column="accept_id"></result>
+
+        <!-- 配置一对多的关系 property：填写pojo类中集合类类属性的名称  javaType：填写集合类型的名称 -->
+        <collection property="answer"  ofType="com.ps.domain.Answer">
+
+            <result property="answer_id" column="answer_id"></result>
+            <result property="member_id" column="member_id"></result>
+            <result property="issue_id" column="issue_id"></result>
+            <result property="answer_content" column="answer_content"></result>
+        </collection>
+
+    </resultMap>
+
+    <!--   查询问题明细-->
+    <select id="queryDetail" resultMap="queryAnswerResultMap">
+        SELECT
+            qi.issue_id AS issue_id,
+            qi.member_id AS memberId,
+            qi.issue_content AS issueContent,
+            qi.integral AS integral,
+            qa.answer_id AS answer_id,
+            qa.answer_content AS answer_content
+        FROM
+            qa_issue qi
+            LEFT JOIN qa_answer qa ON qi.issue_id = qa.issue_id
+        WHERE
+            qi.issue_id = #{issue_id}
+    </select>
+
+
+<!--查询问题-->
+    <select id="queryQuestions" resultType="com.ps.domain.Questions">
+        SELECT
+            issue_id,
+            member_id AS memberId,
+            issue_content AS issueContent,
+            answer_id AS answerId,
+            accept_id AS accept_id,
+            integral AS integral,
+            issue_content AS issueContent
+        FROM
+            qa_issue
+    </select>
+
+    <!--发布问题-->
+    <insert id="issueQuestion">
+        INSERT INTO qa_issue ( member_id, issue_content, answer_id, accept_id )
+        VALUES
+            ( #{memberId},#{issueContent},#{answerId},#{accept_id})
+    </insert>
+
+    <!--减去提问者的积分-->
+    <update id="minusIssue">
+        UPDATE qa_member SET member_integral=member_integral-#{integral} where member_id = #{memberId}
+    </update>
+
+    <!--增加积分流水记录-->
+    <insert id="addIntegrlWater">
+
+        INSERT INTO qa_integral (member_id,Integral_water_detail) VALUES (#{memberId},#{integral})
+
+    </insert>
+
+    <!--回答问题-->
+      <insert id="answerQuestion">
+          INSERT INTO qa_answer (member_id,issue_id,answer_content) VALUES (#{memberId},#{issue_id},#{issueContent})
+      </insert>
+
+    <!--采纳问题-->
+    <update id="acceptQuestion">
+            UPDATE qa_issue SET accept_id = #{accept_id},answer_id = #{answerId} WHERE issue_id = #{issue_id}
+    </update>
+
+    <!--采纳之后修改积分-->
+    <update id="updaupdateIntegral">
+         UPDATE qa_member SET member_integral=member_integral+#{integral} where member_id = #{answerId}
+    </update>
+
+    <!--增加积分流水记录-->
+    <insert id="acceptIntegral">
+
+        INSERT INTO qa_integral (member_id,Integral_water_detail) VALUES (#{answerId},#{integral})
+
+    </insert>
+
+
+</mapper>
